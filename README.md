@@ -1,2 +1,4 @@
-# kekstagram
-Учебный проект на курсе HTML Academy
+# Личный проект «Kekstagram»
+
+Учебный проект на асинхронном курсе HTML Academy
+
