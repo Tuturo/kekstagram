@@ -1,8 +1,11 @@
 // Функция для проверки максимальной длины строки
 
-function checkStringLength(currentString) {
+function checkStringLength(currentString, maxLength) {
 
-    return console.log(currentString.length);
+    if (currentString.length <= maxLength) {
+        return true;
+    } else {
+        return false;
+    }
+
 }
-
-checkStringLength('Привет!');
