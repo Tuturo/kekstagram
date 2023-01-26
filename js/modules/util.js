@@ -18,3 +18,5 @@ const getRandomInt = (min, max) => {
 const checkStrLength = (text, maxLength) => {
     return text.length <= maxLength;
 };
+
+export {getRandomInt};
