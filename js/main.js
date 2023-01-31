@@ -1,1 +1,2 @@
-import './modules/addPhotoPreview.js';
+import './modules/add-preview.js';
+import './modules/big-picture.js';
