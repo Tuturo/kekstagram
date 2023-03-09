@@ -28,8 +28,6 @@ const addPhotoPreview = (array) => {
     return fragment;
 };
 
-console.log(NEW_ARRAY);
-
 addPhotoPreview(NEW_ARRAY);
 
 pictures.append(fragment);
