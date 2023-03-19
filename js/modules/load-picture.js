@@ -34,6 +34,7 @@ const openModal = () => {
     document.addEventListener('keydown', keydownCloseModal);
     smallerControl.addEventListener('click', resizeSmaller);
     biggerControl.addEventListener('click', resizeBigger);
+    applyEffect();
     effectsList.addEventListener('change', applyEffect);
 };
 
