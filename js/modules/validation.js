@@ -13,6 +13,15 @@ const hashtagsValidation = () => {
     };
 
     let inputArray = inputText.split(/\s+/);
+
+    const isValidHashtag = inputArray.every((item) => {
+        const regexp = /^#[^ !@#$%^&*\-#(),.?":{}|<>]*$/gi;
+        console.log(item);
+        return regexp.test(item);
+    });
+    if (!isValidHashtag) {
+        hashtagsField.setCustomValidity('Не хэштег');
+    };
     
     const isStartNotHashtag = inputArray.some((item) => {
         return item[0] !== '#';
@@ -52,26 +61,6 @@ const hashtagsValidation = () => {
     if (inputArray.length > 5) {
         hashtagsField.setCustomValidity('Максимум пять хэштегов');
     };
-
-    // const regexp = /^#(?=.*[^0-9])[a-zа-яё0-9]$/i;
-    // const regexp = /\p{L}/gu;
-    // const regexp = /#[^\p{Alpha}\p{M}\p{Nd}\p{Pc}]/gu;
-    // const regexp = /\S+/gi;
-    // const isNotLettersOrNumbers = inputArray.some((item, index, array) => {
-    //     // return (regexp.test(item)) ? true : false;
-    //     return regexp.test(array.indexOf(item, index + 1));
-    // });
-
-    // const isNotLetters = inputArray.some((item) => {
-    //     console.log(item.match(regexp));
-    //     return regexp.test(item);
-    // });
-
-    // if (isNotLettersOrNumbers) {
-    //     console.log(isNotLettersOrNumbers);
-    //     hashtagsField.setCustomValidity('Working!');
-    // };
-
 
     hashtagsField.reportValidity();
 };
