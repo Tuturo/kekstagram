@@ -1,4 +1,5 @@
 import { sliderHandler } from './slider.js';
+import { hashtagsValidation,onEscapeDown } from './validation.js';
 
 const imgUploadForm = document.querySelector('#upload-select-image');
 const uploadFile = imgUploadForm.querySelector('#upload-file');
@@ -10,6 +11,8 @@ const biggerControl = imgUploadForm.querySelector('.scale__control--bigger');
 const controlValue = imgUploadForm.querySelector('.scale__control--value');
 const imgPreview = imgUploadForm.querySelector('.img-upload__preview');
 const effectsList = imgUploadForm.querySelector('.effects__list');
+const hashtagsField = imgUploadForm.querySelector('.text__hashtags');
+const commentField = imgUploadForm.querySelector('.text__description');
 
 const closeModal = () => {
     imgOverlay.classList.add('hidden');
@@ -19,6 +22,9 @@ const closeModal = () => {
     document.removeEventListener('keydown', keydownCloseModal);
     smallerControl.removeEventListener('click', resizeSmaller);
     biggerControl.removeEventListener('click', resizeBigger);
+    hashtagsField.removeEventListener('input', hashtagsValidation);
+    hashtagsField.removeEventListener('keydown', onEscapeDown);
+    commentField.removeEventListener('keydown', onEscapeDown);
 };
 
 const keydownCloseModal = (evt) => {
@@ -36,6 +42,9 @@ const openModal = () => {
     biggerControl.addEventListener('click', resizeBigger);
     applyEffect();
     effectsList.addEventListener('change', applyEffect);
+    hashtagsField.addEventListener('input', hashtagsValidation);
+    hashtagsField.addEventListener('keydown', onEscapeDown);
+    commentField.addEventListener('keydown', onEscapeDown);
 };
 
 uploadFile.addEventListener('change', openModal);
@@ -81,5 +90,3 @@ const applyEffect = () => {
         };
     };
 };
-
-openModal();

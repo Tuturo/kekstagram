@@ -16,11 +16,10 @@ const hashtagsValidation = () => {
 
     const isValidHashtag = inputArray.every((item) => {
         const regexp = /^#[^ !@#$%^&*\-#(),.?":{}|<>]*$/gi;
-        console.log(item);
         return regexp.test(item);
     });
     if (!isValidHashtag) {
-        hashtagsField.setCustomValidity('Не хэштег');
+        hashtagsField.setCustomValidity('Хэштег может состоять из букв, чисел и символа «_»');
     };
     
     const isStartNotHashtag = inputArray.some((item) => {
@@ -72,4 +71,4 @@ const onEscapeDown = (evt) => {
     }
   }
 
-hashtagsField.addEventListener('input', hashtagsValidation);
+export { hashtagsValidation,onEscapeDown };
