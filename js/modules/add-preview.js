@@ -1,4 +1,3 @@
-import {NEW_ARRAY} from './get-data-array.js';
 import {show} from './big-picture.js';
 
 const template = document.querySelector('#picture').content.querySelector('.picture');
@@ -28,6 +27,10 @@ const addPhotoPreview = (array) => {
     return fragment;
 };
 
-addPhotoPreview(NEW_ARRAY);
+const renderPhotoPreview = (array) => {
+    addPhotoPreview(array);
 
-pictures.append(fragment);
+    pictures.append(fragment);
+};
+
+export { renderPhotoPreview };
