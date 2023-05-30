@@ -90,3 +90,5 @@ const applyEffect = () => {
         };
     };
 };
+
+export { closeModal };

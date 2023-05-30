@@ -5,6 +5,7 @@ import './../nouislider/nouislider.js';
 import './modules/slider.js';
 import './modules/load-picture.js';
 import './modules/validation.js';
+import './modules/user-form.js';
 
 getData((photos) => {
     renderPhotoPreview(photos);
