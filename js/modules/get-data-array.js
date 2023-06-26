@@ -3,12 +3,12 @@ import {MESSAGES, NAMES} from './data.js';
 
 function getUniqNumber() {
     let numbersArr = [];
-    let randomNumber = getRandomInt(1, 25);
+    let randomNumber = getRandomInt(0, 25);
 
     return function checkUniqNumber() {
 
         while (numbersArr.some((element) => element === randomNumber)) {
-            randomNumber = getRandomInt(1, 25);
+            randomNumber = getRandomInt(0, 10);
         };
 
         numbersArr.push(randomNumber);

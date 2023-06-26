@@ -1,10 +1,13 @@
 import { show } from './big-picture.js';
+import { showFilter } from './filter.js';
 
 const template = document.querySelector('#picture').content.querySelector('.picture');
 const pictures = document.querySelector('.pictures');
 const fragment = document.createDocumentFragment();
 
 const addPhotoPreview = (array) => {
+
+    // let currentArray = array.slice();
 
     for (let i = 0; i <= array.length - 1; i++) {
 
@@ -28,9 +31,10 @@ const addPhotoPreview = (array) => {
 };
 
 const renderPhotoPreview = (array) => {
-    addPhotoPreview(array);
-
-    pictures.append(fragment);
+    return new Promise(() => {
+        addPhotoPreview(array);
+        pictures.append(fragment);
+    });
 };
 
 export { renderPhotoPreview };

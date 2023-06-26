@@ -1,5 +1,20 @@
 // Найти рандомное число из диапазона включительно
 
+const checkUniqNumber = (number) => {
+    let numbersArr = [];
+    let randomNumber = number;
+
+    return () => {
+        if (numbersArr.some((element) => element === randomNumber)) {
+            console.log(numbersArr);
+            return false;
+        };
+
+        numbersArr.push(randomNumber);
+        return true;
+    };
+};
+
 const getRandomInt = (min, max) => {
     if (min < 0 || max < 0) {
         return -1;
@@ -12,6 +27,53 @@ const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
+function getUniqNumber() {
+    let numbersArr = [];
+    let randomNumber = getRandomInt(0, 25);
+
+    return function checkUniqNumber() {
+
+        while (numbersArr.some((element) => element === randomNumber)) {
+            randomNumber = getRandomInt(0, 10);
+        };
+
+        numbersArr.push(randomNumber);
+
+        return randomNumber;
+    };
+};
+
+const getRandomArrayElement = (array) => {
+    let randomNum = getRandomInt(0, array.length - 1);
+
+    if (check(randomNum)) {
+        randomNum = getRandomInt(0, array.length - 1);
+    };
+
+    return array[randomNum];
+};
+
+const getRandomUniqArrayElement = (array) => {
+    let randomNum = getRandomInt(0, array.length - 1);
+    let numbersArr = [];
+
+    return () => {
+        while (numbersArr.some((elem) => elem === randomNum)) {
+            randomNum = getRandomInt(0, array.length - 1);
+        }
+
+        numbersArr.push(randomNum);
+
+        return array[randomNum];
+    };
+};
+
+const comparePhotos = (photoA, photoB) => {
+    let rankA = photoA.comments.length;
+    let rankB = photoB.comments.length;
+
+    return rankB - rankA;
+};
 
 // Функция для проверки максимальной длины строки
 
@@ -40,4 +102,4 @@ const showAlert = (message) => {
     }, 3000);
   }
 
-export { getRandomInt,showAlert };
+export { getRandomInt,showAlert,getRandomArrayElement,getRandomUniqArrayElement,comparePhotos };
