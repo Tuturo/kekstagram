@@ -36,47 +36,58 @@ const showFilter = () => {
     });
 };
 
+const RERENDER_DELAY = 500;
+
 const setDefaultFilter = (cb) => {
-    defaultButton.addEventListener('click', () => {
+    defaultButton.addEventListener('click', _.debounce(
+        () => {
 
-        let currentPictures = picturesField.querySelectorAll('.picture');
-        currentPictures.forEach((elem) => {
-            elem.parentNode.removeChild(elem);
-        });
-
-        cb();
-    });
+            let currentPictures = picturesField.querySelectorAll('.picture');
+            currentPictures.forEach((elem) => {
+                elem.parentNode.removeChild(elem);
+            });
+    
+            cb();
+        },
+        RERENDER_DELAY,
+    ));
 };
 
 const setRandomFilter = (photos) => {
-    randomButton.addEventListener('click', () => {
+    randomButton.addEventListener('click', _.debounce(
+        () => {
 
-        let currentPictures = picturesField.querySelectorAll('.picture');
-        currentPictures.forEach((elem) => {
-            elem.parentNode.removeChild(elem);
-        });
-
-        let randomChecking = getRandomUniqArrayElement(photos);
-
-        let newPhotos = new Array(10).fill(null).map(() => randomChecking(photos));
-
-        renderPhotoPreview(newPhotos);
-    });
+            let currentPictures = picturesField.querySelectorAll('.picture');
+            currentPictures.forEach((elem) => {
+                elem.parentNode.removeChild(elem);
+            });
+    
+            let randomChecking = getRandomUniqArrayElement(photos);
+    
+            let newPhotos = new Array(10).fill(null).map(() => randomChecking(photos));
+    
+            renderPhotoPreview(newPhotos);
+        },
+        RERENDER_DELAY,
+    ));
 };
 
 const setDiscussedFilter = (photos) => {
-    discussedButton.addEventListener('click', () => {
+    discussedButton.addEventListener('click', _.debounce(
+        () => {
 
-        let currentPictures = picturesField.querySelectorAll('.picture');
-        currentPictures.forEach((elem) => {
-            elem.parentNode.removeChild(elem);
-        });
-
-        let newPhotos = photos.slice();
-        newPhotos.sort(comparePhotos);
-        renderPhotoPreview(newPhotos);
-
-    });
+            let currentPictures = picturesField.querySelectorAll('.picture');
+            currentPictures.forEach((elem) => {
+                elem.parentNode.removeChild(elem);
+            });
+    
+            let newPhotos = photos.slice();
+            newPhotos.sort(comparePhotos);
+            renderPhotoPreview(newPhotos);
+    
+        },
+        RERENDER_DELAY,
+    ));
 };
 
 export { showFilter,setDefaultFilter,setRandomFilter,setDiscussedFilter };
