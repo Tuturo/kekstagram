@@ -1,12 +1,8 @@
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureClose = bigPicture.querySelector('#picture-cancel');
 const body = document.querySelector('body');
-
-// временно скрытые блоки
-let commentCount = bigPicture.querySelector('.social__comment-count');
-let commentLoader = bigPicture.querySelector('.comments-loader');
-commentCount.classList.add('hidden');
-commentLoader.classList.add('hidden');
+const currentCount = bigPicture.querySelector('.current-count');
+const commentsLoader = bigPicture.querySelector('.comments-loader');
 
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 const commentsList = document.querySelector('.social__comments');
@@ -21,15 +17,30 @@ const getComment = (item) => {
     return result;
 };
 
-
 const renderComments = (comments) => {
-    let commentsFragment = document.createDocumentFragment();
+    let commentNumber = 0;
 
-    for (let i = 0; i <= comments.length - 1; i++) {
-        commentsFragment.appendChild(getComment(comments[i]));
-    };
+    return () => {
+        let commentsFragment = document.createDocumentFragment();
+        let commentQuantity = 5;
+        commentsLoader.classList.remove('hidden');
+        currentCount.innerHTML = '';
 
-    commentsList.append(commentsFragment);
+        for (let i = 0; i <= commentQuantity - 1; i++) {
+            commentsFragment.appendChild(getComment(comments[commentNumber]));
+            commentNumber++;
+
+            if (commentNumber === comments.length) {
+                commentsLoader.classList.add('hidden');
+                break;
+            };
+
+        };
+
+        currentCount.textContent = commentNumber;
+
+        return commentsList.append(commentsFragment);
+    }
 };
 
 const close = () => {
@@ -53,7 +64,10 @@ const show = (picture) => {
     bigPicture.querySelector('.big-picture__img > img').src = picture.url;
     bigPicture.querySelector('.likes-count').textContent = picture.likes;
     bigPicture.querySelector('.comments-count').textContent = picture.comments.length;
-    renderComments(picture.comments);
+    // renderComments(picture.comments);
+    let showComments = renderComments(picture.comments);
+    showComments();
+    commentsLoader.addEventListener('click', showComments);
     bigPicture.querySelector('.social__caption').textContent = picture.description;
 
     bigPictureClose.addEventListener('click', close);

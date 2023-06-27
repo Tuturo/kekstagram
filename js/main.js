@@ -10,8 +10,6 @@ import './modules/load-picture.js';
 import './modules/validation.js';
 import './modules/user-form.js';
 
-const RERENDER_DELAY = 500;
-
 getData((photos) => {
     renderPhotoPreview(photos);
     showFilter();
