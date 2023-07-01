@@ -3,6 +3,10 @@ const bigPictureClose = bigPicture.querySelector('#picture-cancel');
 const body = document.querySelector('body');
 const currentCount = bigPicture.querySelector('.current-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
+const imgUploadForm = document.querySelector('#upload-select-image');
+const fileChooser = imgUploadForm.querySelector('#upload-file');
+const imgPreview = imgUploadForm.querySelector('.img-upload__preview > img');
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 const commentsList = document.querySelector('.social__comments');
@@ -57,6 +61,26 @@ const closeKeydown = (evt) => {
     };
 };
 
+fileChooser.addEventListener('change', () => {
+    const file = fileChooser.files[0];
+    const fileName = file.name.toLowerCase();
+
+    const matches = FILE_TYPES.some((key) => {
+        return fileName.endsWith(key);
+    });
+
+    if (matches) {
+        const reader = new FileReader();
+
+        reader.addEventListener('load', () => {
+            imgPreview.src = reader.result;
+        });
+
+        reader.readAsDataURL(file);
+    };
+
+});
+
 
 const show = (picture) => {
     body.classList.add('modal-open');
@@ -64,7 +88,6 @@ const show = (picture) => {
     bigPicture.querySelector('.big-picture__img > img').src = picture.url;
     bigPicture.querySelector('.likes-count').textContent = picture.likes;
     bigPicture.querySelector('.comments-count').textContent = picture.comments.length;
-    // renderComments(picture.comments);
     let showComments = renderComments(picture.comments);
     showComments();
     commentsLoader.addEventListener('click', showComments);
